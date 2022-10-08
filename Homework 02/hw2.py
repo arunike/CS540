@@ -17,7 +17,7 @@ def get_parameter_vectors():
     s = [0] * 26
     
 
-    with open('./e.txt', encoding = 'utf-8') as f:
+    with open('e.txt', encoding = 'utf-8') as f:
         for line in f:
             # strip: removes the newline character
             # split: split the string on space character
@@ -28,7 +28,7 @@ def get_parameter_vectors():
             e[ord(char) - ord('A')] = float(prob)
     f.close()
 
-    with open('./s.txt',encoding = 'utf-8') as f:
+    with open('s.txt',encoding = 'utf-8') as f:
         for line in f:
             char, prob = line.strip().split(" ")
             s[ord(char) - ord('A')] = float(prob)
@@ -58,7 +58,7 @@ def shred(filename):
 # Happy Coding!
 
 def Q1():
-    X = shred('./samples/letter2.txt')
+    X = shred('letter.txt')
     print('Q1')
     
     for key, value in X.items():
@@ -138,11 +138,11 @@ def Q4(filename):
     else:
         print('{:.4f}'.format(round(1 / (1 + math.e ** difference), 4)))
 
-def main():
-    Q1()
-    Q2('./samples/letter2.txt')
-    Q3('./samples/letter2.txt')
-    Q4('./samples/letter2.txt')
-
 if __name__ == "__main__":
+    def main():
+        Q1()
+        Q2('letter.txt')
+        Q3('letter.txt')
+        Q4('letter.txt')
+        
     main()
