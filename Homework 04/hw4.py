@@ -16,7 +16,7 @@ def load_data(filepath):
 
 ## Calculate features
 def calc_features(row):
-    array = np.append(np.zeros(shape = (6,0)), [int(row['Attack']), int(row['Sp. Atk']), int(row['Speed']), int(row['Defense']), int(row['Sp. Def']), int(row['HP'])])
+    array = np.append(np.zeros(shape = (6,0)), [int(row['Attack']), int(row['Sp. Atk']), int(row['Speed']), int(row['Defense']), int(row['Sp. Def']), int(row['HP'])]) ## Create array
     
     return array.astype(np.int64)
 
@@ -79,16 +79,17 @@ def hac(features):
         Z = np.vstack([Z, [z_0, z_1, minimum, len(dataPoints[index])]]) ## Add to Z
         
         index += 1 ## Increment index
+
     return Z
 
 ## Plot visualization
 def imshow_hac(Z): 
-    plt.figure()
-    hierarchy.dendrogram(Z)
-    plt.show()
+    plt.figure() ## Create figure
+    hierarchy.dendrogram(Z) ## Plot dendrogram
+    plt.show() ## Show plot
 
-if __name__ == '__main__':
+if __name__ == '__main__': ## Main function
     def main():
-        imshow_hac(hac([calc_features(row) for row in load_data('Pokemon.csv')][:30]))
+        imshow_hac((hac([calc_features(row) for row in load_data('Pokemon.csv')][:30]))) ## Plot visualization
 
     main()
