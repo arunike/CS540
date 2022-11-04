@@ -27,7 +27,7 @@ def get_data_loader(training = True):
     train_set = datasets.FashionMNIST('./data', train = True, download = True, transform = custom_transform) ## Create a train set dataset object
     test_set = datasets.FashionMNIST('./data', train = False, transform = custom_transform) ## Create a test set dataset object
     
-    if training: ## If training is True, return the training set
+    if training == True: ## If training is True, return the training set
         trainLoader = torch.utils.data.DataLoader(train_set, batch_size = 64) 
     else: ## If training is False, return the test set
         trainLoader = torch.utils.data.DataLoader(test_set, batch_size = 64, shuffle = False)
@@ -67,8 +67,12 @@ def train_model(model, train_loader, criterion, T):
     opt = optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9) ## Create a optimizer for the model
     model.train() ## Set model to training
 
-    for epochs in range(T): ## Loop over the training data 
-        running_loss = 0.0 ## Variable initialization 
+    for epochs in range(T): ## Loop over the training data
+        ## Variable initialization 
+        running_loss = 0.0 
+        correct = 0
+        total = 0 
+        count = 0
 
         for i, data in enumerate(train_loader, 0): ## Loop over the batches using enumeration 
             inputs, labels = data ## Obtain the data 
@@ -77,20 +81,13 @@ def train_model(model, train_loader, criterion, T):
             loss = criterion(outputs, labels) ## Compute the loss
             loss.backward() ## Backward pass
             opt.step() ## Update the parameters based on the gradients
-            running_loss += loss.item() ## Update the loss
-
-        ## Variable initializations
-        correct = 0
-        total = 0    
-
-        for data in train_loader: ## Loop over the batches
-            images, labels = data ## Obtain the data
-            outputs = model(images) ## Forward pass
             _, predicted = torch.max(outputs.data, 1) ## Obtain the predicted labels
-            total += labels.size(0) ## Update the total number of labels
             correct += (predicted == labels).sum().item() ## Update the number of correct predictions
-            
-        print('Train Epoch: '+ str(epochs) + '   Accuracy: ' + str(correct) + '/' + str(total) + '(' + '{0:.2f}'.format(100 * (correct / total)) + '%' + ')  Loss: ' + '{0:.3f}'.format(running_loss / len(train_loader))) ## Print the output of the model 
+            running_loss += loss.item() ## Update the loss
+            total += labels.size(0) ## Update the total number of labels
+            count += 1 ## Update the count
+
+        print('Train Epoch: '+ str(epochs) + ' Accuracy: ' + str(correct) + '/' + str(total) + '(' + '{:.2f}'.format(100 * (correct / total)) + '%' + ') Loss: ' + '{:.3f}'.format(running_loss / count)) ## Print the output of the model 
 
 
 def evaluate_model(model, test_loader, criterion, show_loss = True):
@@ -107,34 +104,28 @@ def evaluate_model(model, test_loader, criterion, show_loss = True):
     """
 
     criterion = nn.CrossEntropyLoss() ## Implement the training procedure
-    opt = optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9) ## Create a optimizer for the model
     model.eval() ## Turn model into evaluation mode
-    running_loss = 0.0 ## Variable initialization
 
-    for i, data in enumerate(test_loader, 0):
-        inputs, labels = data ## Obtain the data
-        opt.zero_grad() ## Clear the parameter gradients
-        outputs = model(inputs) ## Forward pass
-        loss = criterion(outputs, labels) ## Compute the loss
-        loss.backward() ## Backward pass
-        opt.step() ## Update the parameters based on the gradients
-        running_loss += loss.item() ## Update the loss
-    
-    ## Variable initializations 
+    ## Variable initialization
+    running_loss = 0.0 
     correct = 0
     total = 0
+    count = 0
 
     with torch.no_grad(): ## Disable gradient calculation
         for data, labels in test_loader: ## Loop over the batches
             outputs = model(data) ## Forward pass
             _, predicted = torch.max(outputs.data, 1) ## Obtain the predicted labels
+            loss = criterion(outputs, labels) ## Compute the loss
+            running_loss += loss.item() ## Update the loss
+            count = count + 1 ## Update the count
             total += labels.size(0) ## Update the total number of labels
             correct += (predicted == labels).sum().item() ## Update the number of correct predictions
         
-        if show_loss: ## If show_loss is True, print the loss
-            print_out = 'Average loss: ' + '{0:.4f}'.format(running_loss / total) + '\nAccuracy: ' + '{0:.2f}'.format(100 * (correct / total)) + '%' 
+        if show_loss == True: ## If show_loss is True, print the loss
+            print_out = 'Average loss: ' + '{:.4f}'.format(running_loss / count) + '\nAccuracy: ' + '{:.2f}'.format(100 * (correct / total)) + '%' 
         else: ## If show_loss is False, do not print the loss
-            print_out = 'Accuracy: ' + '{0:.2f}'.format(100 * (correct / total)) + '%' 
+            print_out = 'Accuracy: ' + '{:.2f}'.format(100 * (correct / total)) + '%' 
 
         print(print_out)
 
