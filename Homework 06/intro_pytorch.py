@@ -164,7 +164,9 @@ if __name__ == '__main__':
     print(train_loader.dataset)
     
     model = build_model()
+    print(model)
+    
     train_model(model, train_loader, criterion, 5)
     evaluate_model(model, test_loader, criterion, show_loss = True)
     pred_set, _ = next(iter(test_loader))
-    predict_label(model, pred_set, 4)
+    predict_label(model, pred_set, 1)
