@@ -7,4 +7,5 @@
   <li> <b>Homework 05: <a href="https://github.com/arunike/COMPSCI540/tree/main/Homework%2005/hw5.pdf/" target="blank">Linear Regression</a> </b </li>
   <li> <b>Homework 06: <a href="https://github.com/arunike/COMPSCI540/tree/main/Homework%2006/hw6.pdf/" target="blank">Intro to Neural Network</a> </b </li>
   <li> <b>Homework 07: <a href="https://github.com/arunike/COMPSCI540/tree/main/Homework%2007/hw7.pdf/" target="blank">Convolutional Neural Network</a> </b </li>
+  <li> <b>Homework 08: <a href="https://github.com/arunike/COMPSCI540/tree/main/Homework%2008/hw8.pdf/" target="blank">A* on the 7th-tile Puzzle</a> </b </li>
 </p>
