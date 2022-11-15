@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 from scipy.cluster import hierarchy
 
 ## Load data from csv file
-def load_data(filepath): 
+def load_data(filepath):
     list_dict = list() 
+
     with open(filepath) as csv_file: ## Open file
         reader = csv.DictReader(csv_file) ## Read file
         for row in reader: ## Iterate over rows
@@ -28,7 +29,6 @@ def hac(features):
 
     for label in range(features_length): ## Iterate over features
         dataPoints[label] = [label]
-
     for i in range(features_length): ## Iterate over features
         for j in range(features_length):
             if i == j:
@@ -56,7 +56,6 @@ def hac(features):
                     for cj in cluster_j: ## Iterate over cluster j
                         if maximum < distanceMatrix[ci][cj]: ## If maximum is less than distance between ci and cj
                             maximum = distanceMatrix[ci][cj]
-                
                 if minimum > maximum:  ## If minimum is greater than maximum
                     minimum = maximum
                     z_0 =  i

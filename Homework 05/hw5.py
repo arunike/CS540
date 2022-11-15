@@ -1,11 +1,9 @@
 ## Imports
 import csv
 import sys
-
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import Series
-
 
 ## Main function
 def main(file):
@@ -16,6 +14,7 @@ def main(file):
     with open(file) as csv_file: ## Open the file
         f = csv.reader(csv_file, delimiter=',')
         next(f)
+
         for row in f: ## For each row in the file
             if row[0] != '"': ## If the row is not a header
                 year.append(int(row[0]))
@@ -26,7 +25,6 @@ def main(file):
     ax = s.plot.line() ## Plot the series
     ax.set_xlabel("Year") ## Set the x label
     ax.set_ylabel("Num of frozen days") ## Set the y label
-
     plt.savefig("plot.jpg") ## Save the plot
 
     #Q3a

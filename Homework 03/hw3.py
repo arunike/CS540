@@ -49,7 +49,6 @@ def project_image(image, U):
 # Display the original and projected image
 def display_image(orig, proj): 
     # Your implementation goes here!
-
     # Reshape the images
     orig = orig.reshape(32,32).T 
     proj = proj.reshape(32,32).T 

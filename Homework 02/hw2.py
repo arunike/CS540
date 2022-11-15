@@ -16,7 +16,6 @@ def get_parameter_vectors():
     e = [0] * 26
     s = [0] * 26
     
-
     with open('e.txt', encoding = 'utf-8') as f:
         for line in f:
             # strip: removes the newline character
@@ -37,7 +36,6 @@ def get_parameter_vectors():
     return (e,s)
 
 def shred(filename):
-
     # Using a dictionary here. You may change this to any data structure of
     # your choice such as lists (X=[]) etc. for the assignment
     X = dict()

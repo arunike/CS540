@@ -15,8 +15,9 @@ class LeNet(nn.Module):
     def __init__(self, input_shape = (32, 32), num_classes = 100):
         super(LeNet, self).__init__()
         # certain definitions
+        ## Initialize LeNet
         self.conv1 = nn.Conv2d(3, 6, 5, stride = 1)
-        self.pool = nn.MaxPool2d(2,stride = 2) 
+        self.pool = nn.MaxPool2d(2, stride = 2) 
         self.conv2 = nn.Conv2d(6, 16, 5, stride = 1)
         self.linear1 = nn.Linear(400, 256)
         self.linear2 = nn.Linear(256, 128)
@@ -26,29 +27,35 @@ class LeNet(nn.Module):
         self.input_shape = input_shape
 
     def forward(self, x):
-        shape_dict = {}
+        shape_dict = {} 
         # certain operations
+        ## Convolution Layer 1
         out = self.conv1(x)
         out = self.relu(out)
         out = self.pool(out)
         shape_dict[1] = list(out.shape)
         
+        ## Convolution Layer 2
         out = self.conv2(out)
         out = self.relu(out)
         out = self.pool(out)
         shape_dict[2] = list(out.shape)
         
+        ## Convolution Layer 3
         out = self.flatten(out)
         shape_dict[3] = list(out.shape)
 
+        ## Convolution Layer 4
         out = self.linear1(out)
         out = self.relu(out)
         shape_dict[4] = list(out.shape)
 
+        ## Convolution Layer 5
         out = self.linear2(out)
         out = self.relu(out)
         shape_dict[5] = list(out.shape)
 
+        ## Convolution Layer 6
         out = self.linear3(out)
         shape_dict[6] = list(out.shape)
 
