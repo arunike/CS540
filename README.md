@@ -1,5 +1,6 @@
 # COMPSCI540
 
+## Description
 <p> Projects that I did in COMP SCI 540: Artificial Intelligence.
   <li> <b>Homework 02: <a href="https://github.com/arunike/CS540/tree/main/Homework%2002/hw2.pdf/" target="blank">Probabilistic Language Identification</a> </b> </li> 
   <li> <b>Homework 03: <a href="https://github.com/arunike/CS540/tree/main/Homework%2003/hw3.pdf/" target="blank">Principal Component Analysis</a> </b> </li>
