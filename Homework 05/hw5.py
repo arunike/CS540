@@ -94,7 +94,7 @@ def main(file):
     #Q5
     if b_1 > 0: ## If b_1 is positive
         print("Q5a: >")
-        print("Q5b: The sign of greater than means that the number of winter days has an increasing (postive) trend along with years.")
+        print("Q5b: The sign of greater than means that the number of winter days has an increasing (positive) trend along with years.")
     elif b_1 < 0: ## If b_1 is negative
         print("Q5a: <")
         print("Q5b: The sign of less than means that the number of winter days has a decreasing (negative) trend along with years.")
